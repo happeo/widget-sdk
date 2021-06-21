@@ -1,5 +1,14 @@
+import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
-import { WidgetContent, WidgetContext } from '../interfaces';
+import { ANALYTICS_EVENTS, WidgetContent, WidgetContext } from '../interfaces';
+
+let thisWidgetId = '';
+
+export const setWidgetId = (widgetId: string) => {
+  thisWidgetId = widgetId;
+};
+
+export const getWidgetId = (): string => thisWidgetId;
 
 /**
  * Gets the context of the widget.Who is viewing the widget and where is this widget being displayed
@@ -8,8 +17,11 @@ import { WidgetContent, WidgetContext } from '../interfaces';
  */
 export const getWidgetContext = async (): Promise<WidgetContext> => {
   try {
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'getWidgetContext',
+    });
     const api = await getCustomWidgetGlobal();
-    return api.widget.getContext();
+    return api.widget.getContext(thisWidgetId);
   } catch (error) {
     throw error;
   }
@@ -22,8 +34,11 @@ export const getWidgetContext = async (): Promise<WidgetContext> => {
  */
 export const getJWT = async (): Promise<string> => {
   try {
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'getJWT',
+    });
     const api = await getCustomWidgetGlobal();
-    return api.widget.getJWT();
+    return api.widget.getJWT(thisWidgetId);
   } catch (error) {
     throw error;
   }
@@ -36,8 +51,11 @@ export const getJWT = async (): Promise<string> => {
  */
 export const getWidgetContent = async (): Promise<WidgetContent> => {
   try {
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'getWidgetContent',
+    });
     const api = await getCustomWidgetGlobal();
-    return api.widget.getContent();
+    return api.widget.getContent(thisWidgetId);
   } catch (error) {
     throw error;
   }
@@ -56,8 +74,11 @@ export const saveWidgetContent = async (
   properties: any
 ): Promise<any> => {
   try {
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'saveWidgetContent',
+    });
     const api = await getCustomWidgetGlobal();
-    return api.widget.saveContent(content, properties);
+    return api.widget.saveContent(content, properties, thisWidgetId);
   } catch (error) {
     throw error;
   }

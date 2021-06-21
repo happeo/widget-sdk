@@ -7,6 +7,7 @@ declare global {
 
 export enum ANALYTICS_EVENTS {
   WIDGET_INIT = 'Custom widget: initialise',
+  WIDGET_REQUEST = 'Custom widget: use sdk',
 }
 
 export interface AnalyticsEvent {

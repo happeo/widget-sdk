@@ -1,10 +1,17 @@
+import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
-import { User } from '../interfaces';
+import { ANALYTICS_EVENTS, User } from '../interfaces';
+import { getWidgetId } from '../widget';
 
 export const getCurrentUser = async (): Promise<User> => {
   try {
+    const widgetId = getWidgetId();
     const api = await getCustomWidgetGlobal();
-    return api.widget.getCurrentUser();
+
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'getCurrentUser',
+    });
+    return api.widget.getCurrentUser(widgetId);
   } catch (error) {
     throw error;
   }
