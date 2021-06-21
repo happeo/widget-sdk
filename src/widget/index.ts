@@ -69,13 +69,13 @@ export const getWidgetContent = async (): Promise<WidgetContent> => {
  * @param properties Object properties to save
  * @returns void
  */
-export const saveWidgetContent = async (
+export const updateWidgetContent = async (
   content: string,
   properties: any
 ): Promise<any> => {
   try {
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'saveWidgetContent',
+      functionName: 'updateWidgetContent',
     });
     const api = await getCustomWidgetGlobal();
     return api.widget.saveContent(content, properties, thisWidgetId);

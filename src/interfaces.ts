@@ -22,7 +22,7 @@ export interface WidgetContext {
   token?: string;
   pageGroupId?: string;
   pageId?: string;
-  widgetId?: string;
+  localWidgetId?: string;
 }
 
 export interface WidgetContent {
