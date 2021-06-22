@@ -11,7 +11,21 @@ export const getCurrentUser = async (): Promise<User> => {
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'getCurrentUser',
     });
-    return api.widget.getCurrentUser(widgetId);
+    return api.user.getCurrentUser(widgetId);
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const oAuthBegin = async (): Promise<void> => {
+  try {
+    const widgetId = getWidgetId();
+    const api = await getCustomWidgetGlobal();
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'oAuthBegin',
+    });
+
+    return api.user.oAuthBegin(widgetId);
   } catch (error) {
     throw error;
   }
