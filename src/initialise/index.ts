@@ -1,6 +1,7 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
 import { ANALYTICS_EVENTS } from '../interfaces';
+import { setWidgetId } from '../widget';
 
 export const init = async (widgetId: string): Promise<void> => {
   try {
