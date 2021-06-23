@@ -1,5 +1,6 @@
 import { getAnalyticsGlobal } from '../globals';
 import { AnalyticsEvent, ANALYTICS_EVENTS } from '../interfaces';
+import { getWidgetId } from '../widget';
 
 /**
  * _sendToHappeo
@@ -26,9 +27,10 @@ export const trackEvent = (
   properties: any
 ): void => {
   try {
+    const widgetId = getWidgetId();
     _sendToHappeo('trackClient', {
       name: eventName,
-      properties,
+      properties: { widgetId, ...properties },
       timestamp: Date.now(),
     });
   } catch (error) {

@@ -78,7 +78,7 @@ export const setWidgetContent = async (
       functionName: 'setWidgetContent',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.saveContent(content, properties, thisWidgetId);
+    return api.widget.setContent(content, properties, thisWidgetId);
   } catch (error) {
     throw error;
   }
