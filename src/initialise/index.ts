@@ -28,10 +28,10 @@ export const init = async (widgetId: string): Promise<void> => {
     if (!widgetId) {
       throw new Error('Missing widgetId');
     }
+    setWidgetId(widgetId);
     await getCustomWidgetGlobal();
     await trackEvent(ANALYTICS_EVENTS.WIDGET_INIT, { widgetId });
-    setWidgetId(widgetId);
   } catch (error) {
-    throw new Error();
+    throw error;
   }
 };
