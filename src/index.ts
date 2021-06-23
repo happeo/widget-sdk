@@ -1,3 +1,9 @@
-export * from './initialise';
-export * as widget from './widget';
-export * as user from './user';
+import { init } from './initialise';
+import { UserApi } from './user';
+import { WidgetApi } from './widget';
+
+export default {
+  init,
+  user: UserApi,
+  widget: WidgetApi,
+};
