@@ -1,2 +1,3 @@
 export * from './initialise';
-export * from './widget';
+export * as widget from './widget';
+export * as user from './widget';

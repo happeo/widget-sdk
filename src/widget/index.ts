@@ -15,10 +15,10 @@ export const getWidgetId = (): string => thisWidgetId;
  *
  * @returns Context of the widget.
  */
-export const getWidgetContext = async (): Promise<WidgetContext> => {
+export const getContext = async (): Promise<WidgetContext> => {
   try {
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'getWidgetContext',
+      functionName: 'widget.getContext',
     });
     const api = await getCustomWidgetGlobal();
     return api.widget.getContext(thisWidgetId);
@@ -35,7 +35,7 @@ export const getWidgetContext = async (): Promise<WidgetContext> => {
 export const getJWT = async (): Promise<string> => {
   try {
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'getJWT',
+      functionName: 'widget.getJWT',
     });
     const api = await getCustomWidgetGlobal();
     return api.widget.getJWT(thisWidgetId);
@@ -49,10 +49,10 @@ export const getJWT = async (): Promise<string> => {
  *
  * @returns Content for the widget. String content and object properties
  */
-export const getWidgetContent = async (): Promise<WidgetContent> => {
+export const getContent = async (): Promise<WidgetContent> => {
   try {
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'getWidgetContent',
+      functionName: 'widget.getContent',
     });
     const api = await getCustomWidgetGlobal();
     return api.widget.getContent(thisWidgetId);
@@ -69,13 +69,13 @@ export const getWidgetContent = async (): Promise<WidgetContent> => {
  * @param properties Object properties to save
  * @returns void
  */
-export const setWidgetContent = async (
+export const setContent = async (
   content: string,
   properties: any
 ): Promise<any> => {
   try {
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'setWidgetContent',
+      functionName: 'widget.setContent',
     });
     const api = await getCustomWidgetGlobal();
     return api.widget.setContent(content, properties, thisWidgetId);

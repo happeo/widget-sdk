@@ -9,7 +9,7 @@ export const getCurrentUser = async (): Promise<User> => {
     const api = await getCustomWidgetGlobal();
 
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'getCurrentUser',
+      functionName: 'user.getCurrentUser',
     });
     return api.user.getCurrentUser(widgetId);
   } catch (error) {
@@ -22,7 +22,7 @@ export const oAuthBegin = async (): Promise<void> => {
     const widgetId = getWidgetId();
     const api = await getCustomWidgetGlobal();
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'oAuthBegin',
+      functionName: 'user.oAuthBegin',
     });
 
     return api.user.oAuthBegin(widgetId);
