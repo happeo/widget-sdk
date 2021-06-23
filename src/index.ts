@@ -1,9 +1,9 @@
 import { init } from './initialise';
-import { UserApi } from './user';
-import { WidgetApi } from './widget';
+import * as user from './user';
+import * as widget from './widget';
 
 export default {
   init,
-  user: UserApi,
-  widget: WidgetApi,
+  user,
+  widget,
 };

@@ -1,6 +1,6 @@
 import { getAnalyticsGlobal } from '../globals';
+import { getWidgetId } from '../initialise';
 import { AnalyticsEvent, ANALYTICS_EVENTS } from '../interfaces';
-import { getWidgetId } from '../widget';
 
 /**
  * _sendToHappeo
