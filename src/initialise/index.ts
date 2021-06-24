@@ -1,7 +1,6 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
 import { ANALYTICS_EVENTS } from '../interfaces';
-import { initUiKit } from '../uikit';
 
 let thisWidgetId = '';
 
