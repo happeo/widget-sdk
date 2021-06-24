@@ -3,7 +3,10 @@ import * as user from './user';
 import * as widget from './widget';
 
 export default {
-  init,
-  user,
-  widget,
+  happeo: {
+    init,
+    user,
+    widget,
+  },
+  uikit: window.__customWidget?.uikit,
 };

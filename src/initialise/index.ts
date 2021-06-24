@@ -1,6 +1,7 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
 import { ANALYTICS_EVENTS } from '../interfaces';
+import { initUiKit } from '../uikit';
 
 let thisWidgetId = '';
 
@@ -29,7 +30,7 @@ export const init = async (widgetId: string): Promise<void> => {
       throw new Error('Missing widgetId');
     }
     setWidgetId(widgetId);
-    await getCustomWidgetGlobal();
+    const api = await getCustomWidgetGlobal();
     await trackEvent(ANALYTICS_EVENTS.WIDGET_INIT, { widgetId });
   } catch (error) {
     throw error;
