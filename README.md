@@ -96,9 +96,41 @@ Does not perform remote calls itself, depending where widget is displayed, this 
 
 ## SDK uikit
 
-The Happeo UI Kit can be accessed through the `sdk.uikit` object. The reason why we exposed the uikit this way boils down to 2 points: 1) by doing this, we can keep the custom widget package size very small and 2) we use styled-components, which kind of makes this the only way to expose these components pure react custom widgets. _However, if you do find a way to works some magic that allows us to remove this approach, please make a PR in the [Custom Widget Templates](https://github.com/happeo/custom-widget-templates)._
+The Happeo UI Kit can be accessed through the `sdk.uikit` object. The reason why we exposed components through this object, is so that we can give you the possibility to use some non-public-uikit components.
 
-To access the Happeo UI Kit components, you can do that by doing `sdk.uikit[namespace][componentName]`. An example could be `<sdk.uikit.buttons.ButtonPrimary>`, all props work as described in the public [UI kit documentation](https://uikit.happeo.com/).
+### Currenlty we support the following
+
+`<Editor />` = Rich text editor
+
+Note that the editor is a very complex component that requires some knowledge on how it works. But here are the most important things to know:
+
+- You should attach a ref to the editor, for example `ref={editorRef}`.
+- When you want the content of the editor, call `editorRef.current?.getContent();`.
+- If you want to clear the editor, call `editorRef.current?.clearContent();`.
+- Focusing on editor can be done with `editorRef.current.setFocus()`. Note that the init takes a couple of milliseconds.
+- Full list of methods can be found at [Froala editor's website](https://froala.com/wysiwyg-editor/docs/methods/).
+
+**Props:**
+
+- content <string> content
+- type <string> We support different out-of-the-box editor configurations. We recommend using "full" for full experience and "comment" for inline experience. See prop-types.
+- showMentionPicker <bool>
+- showEmojiPicker <bool>
+- showHashtagPicker <bool>
+- channelId <string> if provided, the mentioning will target the given channel
+- opts <object> Additional froala editor configurations
+- hashtagAddedCallback <function>
+- onFocused <function>
+- onBlurred <function>
+- onContentChanged <function>
+- onVideoInserted <function>
+- onCmdEnterShortcutTriggered <function>
+- maxNumberOfHashtags <number>
+- onImageUploaded <function>
+- onImageInserted <function>
+- onImageRemoved <function>
+
+To access the Happeo UI Kit components, you can do that by doing `sdk.uikit[componentName]`. An example could be `<sdk.uikitEditor>`.
 
 Full list of available components can be found here:
 https://uikit.happeo.com/
