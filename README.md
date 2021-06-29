@@ -92,7 +92,19 @@ Gets the content for the widget. Depending on where widget is shown, different c
 
 **happeo.widget.setContent();**
 
-Does not perform remote calls itself, depending where widget is displayed, this may include an automatic remote call. Returns Promise.
+Sets string content to widget.
+
+**happeo.widget.getSettings();**
+
+Gets the settings for this widget. These may include things like background color, font sizes or other things you want the user to configure.
+
+**happeo.widget.setSettings();**
+
+Sets settings for this widget.
+
+**happeo.widget.declareSettings();**
+
+Creates new settings that are shown to the user in the Happeo UI. Creates a seamless experience for the user where they can fill in overall configrutations for this widget.
 
 ## SDK uikit
 
@@ -104,10 +116,11 @@ The Happeo UI Kit can be accessed through the `sdk.uikit` object. The reason why
 
 Note that the editor is a very complex component that requires some knowledge on how it works. But here are the most important things to know:
 
-- You should attach a ref to the editor, for example `ref={editorRef}`.
-- When you want the content of the editor, call `editorRef.current?.getContent();`.
-- If you want to clear the editor, call `editorRef.current?.clearContent();`.
-- Focusing on editor can be done with `editorRef.current.setFocus()`. Note that the init takes a couple of milliseconds.
+- When adding callback functions, the editor will provide `this`, but you need to use a named function. So no `const dada = () => {}`, but `function onContentChanged() {}`.
+- When you want the content of the editor, call `this.el.getContent();`.
+- If you want to clear the editor, call `this.el.clearContent();`.
+- If you need to access the editor before you get it through a callback. Attach a ref to the parent node and find it via `editorParent.current.querySelector(".fr-element")`.
+- Focusing on editor can be done with `editor.setFocus()`. Note that the init takes a couple of milliseconds.
 - Full list of methods can be found at [Froala editor's website](https://froala.com/wysiwyg-editor/docs/methods/).
 
 **Props:**

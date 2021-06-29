@@ -62,20 +62,88 @@ export const getContent = async (): Promise<WidgetContent> => {
  * an automatic remote call.
  *
  * @param content Stringified content to save
- * @param properties Object properties to save
  * @returns void
  */
-export const setContent = async (
-  content: string,
-  properties: any
-): Promise<any> => {
+export const setContent = async (content: string): Promise<any> => {
   try {
+    if (typeof content !== 'string') {
+      throw new Error('Invalid content type, only string allowed.');
+    }
+
     const widgetId = getWidgetId();
     trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.setContent',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.setContent(content, properties, widgetId);
+    return api.widget.setContent(content, widgetId);
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * Gets widget settings
+ *
+ * @returns Object settings
+ */
+export const getSettings = async (): Promise<any> => {
+  try {
+    const widgetId = getWidgetId();
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'widget.getSettings',
+    });
+    const api = await getCustomWidgetGlobal();
+    return api.widget.getSettings(widgetId);
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * Does not perform remote calls itself, depending where widget is displayed, this may include
+ * an automatic remote call.
+ *
+ * @param settings Object settings to save
+ * @returns void
+ */
+export const setSettings = async (settings: object): Promise<any> => {
+  try {
+    if (typeof settings !== 'object') {
+      throw new Error('Invalid content type, only object allowed.');
+    }
+
+    const widgetId = getWidgetId();
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'widget.setSettings',
+    });
+    const api = await getCustomWidgetGlobal();
+    return api.widget.setSettings(settings, widgetId);
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * Creates settings to the Happeo UI that the user can interact with
+ *
+ * @param settings Array of Objects settings to save
+ * @returns void
+ */
+export const declareSettings = async (settings: object, callback: Function) => {
+  try {
+    if (typeof settings !== 'object') {
+      throw new Error('Invalid content type, only object allowed.');
+    }
+    if (typeof callback !== 'function') {
+      throw new Error('Missing callback function');
+    }
+
+    const widgetId = getWidgetId();
+    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'widget.declareSettings',
+    });
+    const api = await getCustomWidgetGlobal();
+    return api.widget.declareSettings(settings, callback, widgetId);
   } catch (error) {
     throw error;
   }
