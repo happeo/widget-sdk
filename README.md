@@ -84,7 +84,7 @@ The Happeo UI Kit can be accessed through the `sdk.uikit` object. The reason why
 
 ### Currenlty we support the following
 
-`<Editor />` = Rich text editor
+`<sdk.uikit.RichTextEditor />` = Rich text editor
 
 Note that the editor is a very complex component that requires some knowledge on how it works. But here are the most important things to know:
 
@@ -114,8 +114,3 @@ Note that the editor is a very complex component that requires some knowledge on
 - onImageUploaded `<function>`
 - onImageInserted `<function>`
 - onImageRemoved `<function>`
-
-To access the Happeo UI Kit components, you can do that by doing `sdk.uikit[componentName]`. An example could be `<sdk.uikitEditor>`.
-
-Full list of available components can be found here:
-https://uikit.happeo.com/
