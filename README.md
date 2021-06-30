@@ -97,23 +97,23 @@ Note that the editor is a very complex component that requires some knowledge on
 
 **Props:**
 
-- content <string> content
-- type <string> We support different out-of-the-box editor configurations. We recommend using "full" for full experience and "comment" for inline experience. See prop-types.
-- showMentionPicker <bool>
-- showEmojiPicker <bool>
-- showHashtagPicker <bool>
-- channelId <string> if provided, the mentioning will target the given channel
-- opts <object> Additional froala editor configurations
-- hashtagAddedCallback <function>
-- onFocused <function>
-- onBlurred <function>
-- onContentChanged <function>
-- onVideoInserted <function>
-- onCmdEnterShortcutTriggered <function>
-- maxNumberOfHashtags <number>
-- onImageUploaded <function>
-- onImageInserted <function>
-- onImageRemoved <function>
+- content `<string>` content
+- type `<string>` We support different out-of-the-box editor configurations. We recommend using "full" for full experience and "comment" for inline experience. See prop-types.
+- showMentionPicker `<bool>`
+- showEmojiPicker `<bool>`
+- showHashtagPicker `<bool>`
+- channelId `<string>` if provided, the mentioning will target the given channel
+- opts `<object>` Additional froala editor configurations
+- hashtagAddedCallback `<function>`
+- onFocused `<function>`
+- onBlurred `<function>`
+- onContentChanged `<function>`
+- onVideoInserted `<function>`
+- onCmdEnterShortcutTriggered `<function>`
+- maxNumberOfHashtags `<number>`
+- onImageUploaded `<function>`
+- onImageInserted `<function>`
+- onImageRemoved `<function>`
 
 To access the Happeo UI Kit components, you can do that by doing `sdk.uikit[componentName]`. An example could be `<sdk.uikitEditor>`.
 
