@@ -9,100 +9,72 @@ The widget SDK allows you to tap directly to Happeo apis and content in order to
 Install the widget SDK to your Happeo Widget project. See examples from [Custom Widget Templates](https://github.com/happeo/custom-widget-templates).
 
 ```
-
-
-
 npm install @happeo/widget-sdk
-
-
-
 ```
 
-In your app, import the SDK and run `init(widgetId)` in order to start using it:
+In your app, import the SDK and run `happeo.init(widgetId)` in order to start using it:
 
 ```
-
-
-
 import widgetSDK from "@happeo/widget-sdk";
 
 const { happeo, uikit } = widgetSDK
 
-
-
 const myAwesomeWidget = ({widgetId}) => {
+    const [user, setUser] = useState();
 
-const [user, setUser] = useState();
+    useEffect(() => {
+        const init = async () => {
+            await happeo.init(widgetId);
+            setUser(await happeo.user.getCurrentUser());
+        }
+        init();
+    },[widgetId]);
 
-
-
-useEffect(() => {
-
-const init = async () => {
-
-await happeo.init(widgetId);
-
-setUser(await happeo.user.getCurrentUser())
-
-}
-
-init();
-
-},[widgetId])
-
-
-
-return (
-
-<uikit.typography.BodyUI>Hello world, {user && user.name.fullName}!</uikit.typography.BodyUI>
-
-)
-
+    return (
+        <p>Hello world, {user?.name?.fullName}!</p>
+    )
 };
-
-
-
 ```
 
 ## SDK requests - happeo
 
-**happeo.init("my-widget-id");**
+`sdk.happeo.init("my-widget-id");`
 
 Initialises the SDK. Requires string widget id as the parameter. Returns Promise.
 
-**happeo.user.getCurrentUser();**
+`sdk.happeo.user.getCurrentUser();`
 
 Returns the full current user who is viewing this widget. Returns Promise.
 
-**happeo.user.oAuthBegin();**
+`sdk.happeo.user.oAuthBegin();`
 
 Starts oAuth flow, which can be specified to the widget from the widget setup. Returns Promise.
 
-**happeo.widget.getContext();**
+`sdk.happeo.widget.getContext();`
 
 Gets the context of the widget. Who is viewing the widget and where is this widget being displayed. Returns Promise.
 
-**happeo.widget.getJWT();**
+`sdk.happeo.widget.getJWT();`
 
 Gets the JWT for the widget. JWT includes signed data from the user & organisation. Returns Promise.
 
-**happeo.widget.getContent();**
+`sdk.happeo.widget.getContent();`
 
 Gets the content for the widget. Depending on where widget is shown, different content will be delivered. Returns Promise.
 
-**happeo.widget.setContent();**
+`sdk.happeo.widget.setContent();`
 
-Sets string content to widget.
+Sets string content to widget. This is the primary way of storing data in this widget. Note that this content is also indexed and can be found in search. So if you store object keys or metadata here, those all will be searchable.
 
-**happeo.widget.getSettings();**
+`sdk.happeo.widget.getSettings();`
 
 Gets the settings for this widget. These may include things like background color, font sizes or other things you want the user to configure.
 
-**happeo.widget.setSettings();**
+`sdk.happeo.widget.setSettings();`
 
-Sets settings for this widget.
+Sets settings for this widget. This can be useful if you want to save some properties in the settings object and not in the content.
 
-**happeo.widget.declareSettings();**
+`sdk.happeo.widget.declareSettings();`
 
 Creates new settings that are shown to the user in the Happeo UI. Creates a seamless experience for the user where they can fill in overall configrutations for this widget.
 
