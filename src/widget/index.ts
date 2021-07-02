@@ -127,6 +127,7 @@ export const setSettings = async (settings: object): Promise<any> => {
  * Creates settings to the Happeo UI that the user can interact with
  *
  * @param settings Array of Objects settings to save
+ * @param callback Callback function with updated data, runs on init and on every settings update
  * @returns void
  */
 export const declareSettings = async (settings: object, callback: Function) => {

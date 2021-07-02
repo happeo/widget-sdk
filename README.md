@@ -40,35 +40,67 @@ const myAwesomeWidget = ({widgetId}) => {
 
 `sdk.happeo.init("my-widget-id");`
 
-Initialises the SDK. Requires string widget id as the parameter. Returns Promise.
+Initialises the SDK. Requires string widget id as the parameter.
 
 `sdk.happeo.user.getCurrentUser();`
 
-Returns the full current user who is viewing this widget. Returns Promise.
+Returns the full current user who is viewing this widget. This includes all user data and organisation data.
 
 `sdk.happeo.user.oAuthBegin();`
 
-Starts oAuth flow, which can be specified to the widget from the widget setup. Returns Promise.
+Starts oAuth flow, which can be specified to the widget from the widget setup. If this field is not specified in the widget settings (admin panel or marketplace), this function will throw an error. NOTE: This also requires userId and organisationId scopes to be added to the widget permissions.
+
+The oAuth flow should be used when your custom widget requires an external oauth that stores authentication keys to your own servers. This flow is protected by the generated JWT key, which is used to verify the oAuth flow callback in Happeo servers.
+
+The function communicates back with a promise if the flow was successful.
 
 `sdk.happeo.widget.getContext();`
 
-Gets the context of the widget. Who is viewing the widget and where is this widget being displayed. Returns Promise.
+Gets the full context of the widget:
+
+- userId
+- organisationId
+- editMode
+- token
+- scopedData
+  - user
+    - id
+    - primaryEmail
+  - organisation
+    -id
+- context
+  - hostname
+  - href
+  - pathname
+- location
+  - channelId
+  - pageId
+  - pageGroupId
+  - localWidgetId
 
 `sdk.happeo.widget.getJWT();`
 
-Gets the JWT for the widget. JWT includes signed data from the user & organisation. Returns Promise.
+Gets the JWT for the widget if the widget has attached scopes. JWT contains the scoped data. Also returned in the `sdk.happeo.widget.getContext();`.
 
 `sdk.happeo.widget.getContent();`
 
-Gets the content for the widget. Depending on where widget is shown, different content will be delivered. Returns Promise.
+Gets the content for the widget. Content is not specific to the widget, but to the context. As an example, if this widget is added to a page in 2 places, widget will have own content for both places.
+
+Important note:
+Everything in the content is indexed in the Happeo search. So when you set this content (see below), note that you should consider this when making decisions on the data structure.
 
 `sdk.happeo.widget.setContent();`
 
-Sets string content to widget. This is the primary way of storing data in this widget. Note that this content is also indexed and can be found in search. So if you store object keys or metadata here, those all will be searchable.
+Sets string content to widget. This is the primary way of storing data in this widget. Data is stored in Happeo's servers.
+
+Important note:
+Everything in the content is indexed in the Happeo search. So when you set this content, note that you should consider this when making decisions on the data structure.
 
 `sdk.happeo.widget.getSettings();`
 
 Gets the settings for this widget. These may include things like background color, font sizes or other things you want the user to configure.
+
+The settings object is always a simple key - value object with no nested structures. If you want nested structures, then you need to stringify the value.
 
 `sdk.happeo.widget.setSettings();`
 
@@ -76,7 +108,64 @@ Sets settings for this widget. This can be useful if you want to save some prope
 
 `sdk.happeo.widget.declareSettings();`
 
-Creates new settings that are shown to the user in the Happeo UI. Creates a seamless experience for the user where they can fill in overall configrutations for this widget.
+Creates new settings that are shown to the user in the Happeo UI. This allowes a seamless experience for the user where they can fill in overall configrutations for this widget.
+
+The function takes in the settings object and a callback. The callback is returned on init, with the existing settings and on every settings change.
+
+Settings object structure and example:
+
+```
+[
+  {
+    placeholder: "Text placeholder",
+    key: "uniqueStringKey",
+    value: "defaultValue",
+    type: "color",
+  },
+  {
+    placeholder: "Another setting",
+    key: "anotherUniqueKey",
+    value: "this is text",
+    type: "text",
+  },
+]
+```
+
+Possible setting types are:
+"checkbox", "color", "dropdown", "help-link", "number", "paragraph", "text", "toggle", "upload", "url".
+
+**checkbox**
+Presents a checkbox to the user. Checkbox requires either string "TRUE" or string "FALSE" and not proper booleans.
+
+**color**
+Presents a color picker for the user.
+
+**dropdown**
+Presents a dropdown to the user. Requires key `options` with `label` and `value`.
+Example:
+
+```
+{
+    placeholder: "Dropdown",
+    key: "myDropdown",
+    options: [
+        {
+            label: "Select 123",
+            value: 123
+        }
+    ],
+    type: "dropdown",
+  }
+```
+
+**help-link**
+Displays a help link to the user. Link opens in a new tab.
+
+**number**
+Displays a number selector to the user. Can include `minValue` and `maxValue`.
+
+**paragraph**
+Displays a paragraph type picker to the user. Note this is not a text field, but a selector to select either "h1", "h2", "h3", "p".
 
 ## SDK uikit
 
