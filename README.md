@@ -58,25 +58,35 @@ The function communicates back with a promise if the flow was successful.
 
 Gets the full context of the widget:
 
-- userId
-- organisationId
-- editMode
-- token
-- scopedData
-  - user
-    - id
-    - primaryEmail
-  - organisation
-    -id
-- context
-  - hostname
-  - href
-  - pathname
-- location
-  - channelId
-  - pageId
-  - pageGroupId
-  - localWidgetId
+```
+
+{
+    userId: "123",
+    organisationId: "223",
+    editMode: true,
+    token: "adadadad",
+    scopedData: {
+        user: {
+            id: "123",
+            primaryEmail: "example@example.com"
+        },
+        organisation: {
+            id: "223"
+        }
+    },
+    context: {
+        hostname: "app.happeo.com",
+        href: "https://app.happeo.com/...",
+        pathname: "/pages/..."
+    },
+    location: {
+        channelId: "333",
+        pageId: "111",
+        pageGroupId: "223",
+        localWidgetId: "3443"
+    }
+}
+```
 
 `sdk.happeo.widget.getJWT();`
 
@@ -131,16 +141,21 @@ Settings object structure and example:
 ]
 ```
 
+### Widget setting types
+
 Possible setting types are:
 "checkbox", "color", "dropdown", "help-link", "number", "paragraph", "text", "toggle", "upload", "url".
 
 **checkbox**
+
 Presents a checkbox to the user. Checkbox requires either string "TRUE" or string "FALSE" and not proper booleans.
 
 **color**
+
 Presents a color picker for the user.
 
 **dropdown**
+
 Presents a dropdown to the user. Requires key `options` with `label` and `value`.
 Example:
 
@@ -159,18 +174,23 @@ Example:
 ```
 
 **help-link**
+
 Displays a help link to the user. Link opens in a new tab.
 
 **number**
+
 Displays a number selector to the user. Can include `minValue` and `maxValue`.
 
 **paragraph**
+
 Displays a paragraph type picker to the user. Note this is not a text field, but a selector to select either "h1", "h2", "h3", "p".
 
 **text**
+
 Displays a simple text field to the user.
 
 **toggle**
+
 Displays radio buttons to the user. Requires key `options` with `label` and `value`.
 Example:
 
@@ -189,6 +209,7 @@ Example:
 ```
 
 **upload**
+
 Displays an image upload for the user. Can be used with prop `enableCropping` -boolean and `croppingConfig` -object.
 
 ```
@@ -203,6 +224,7 @@ Displays an image upload for the user. Can be used with prop `enableCropping` -b
 ```
 
 **url**
+
 Displays a url field to the user.
 
 ## SDK uikit
