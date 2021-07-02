@@ -167,6 +167,44 @@ Displays a number selector to the user. Can include `minValue` and `maxValue`.
 **paragraph**
 Displays a paragraph type picker to the user. Note this is not a text field, but a selector to select either "h1", "h2", "h3", "p".
 
+**text**
+Displays a simple text field to the user.
+
+**toggle**
+Displays radio buttons to the user. Requires key `options` with `label` and `value`.
+Example:
+
+```
+{
+    placeholder: "Dropdown",
+    key: "myDropdown",
+    options: [
+        {
+            label: "Select 123",
+            value: 123
+        }
+    ],
+    type: "dropdown",
+  }
+```
+
+**upload**
+Displays an image upload for the user. Can be used with prop `enableCropping` -boolean and `croppingConfig` -object.
+
+```
+{
+    ...configItem,
+    enableCropping: true,
+    croppingConfig: {
+        width: 1234,
+        height: 234
+    }
+  }
+```
+
+**url**
+Displays a url field to the user.
+
 ## SDK uikit
 
 The Happeo UI Kit can be accessed through the `sdk.uikit` object. The reason why we exposed components through this object, is so that we can give you the possibility to use some non-public-uikit components.
