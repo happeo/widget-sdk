@@ -84,11 +84,18 @@ The Happeo UI Kit can be accessed through the `sdk.uikit` object. The reason why
 
 ### Currenlty we support the following
 
+`<sdk.uikit.ProviderWrapper />` = Wrapper for language and redux provider
+
+This component is used in parallell with the `<sdk.uikit.RichTextEditor />`. It provides translations and storage for the child components.
+
 `<sdk.uikit.RichTextEditor />` = Rich text editor
+
+**Requires `<sdk.uikit.ProviderWrapper />` as a parent component**
 
 Note that the editor is a very complex component that requires some knowledge on how it works. But here are the most important things to know:
 
 - When adding callback functions, the editor will provide `this`, but you need to use a named function. So no `const dada = () => {}`, but `function onContentChanged() {}`.
+- The callback function may, in some cases, create a re-rendering of the component. So be mindful of this when developing. Re-rendering will cause annoying caret jumping and clear the undo history.
 - When you want the content of the editor, call `this.el.getContent();`.
 - If you want to clear the editor, call `this.el.clearContent();`.
 - If you need to access the editor before you get it through a callback. Attach a ref to the parent node and find it via `editorParent.current.querySelector(".fr-element")`.
@@ -97,20 +104,22 @@ Note that the editor is a very complex component that requires some knowledge on
 
 **Props:**
 
-- content `<string>` content
-- type `<string>` We support different out-of-the-box editor configurations. We recommend using "full" for full experience and "comment" for inline experience. See prop-types.
-- showMentionPicker `<bool>`
-- showEmojiPicker `<bool>`
-- showHashtagPicker `<bool>`
-- channelId `<string>` if provided, the mentioning will target the given channel
-- opts `<object>` Additional froala editor configurations
-- hashtagAddedCallback `<function>`
-- onFocused `<function>`
-- onBlurred `<function>`
-- onContentChanged `<function>`
-- onVideoInserted `<function>`
-- onCmdEnterShortcutTriggered `<function>`
-- maxNumberOfHashtags `<number>`
-- onImageUploaded `<function>`
-- onImageInserted `<function>`
-- onImageRemoved `<function>`
+| Props                       | Type     | Description                                                                                                                                                   |
+| --------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| content                     | string   | Content of the widget.                                                                                                                                        |
+| type                        | string   | Editor type, creates different user experience for the editor. Supported values are "inline", "comment", "post", "article", "bare", "banner", "full", "hero". |
+| showMentionPicker           | bool     | Shows mention picker                                                                                                                                          |
+| showEmojiPicker             | bool     | Shows emoji picker                                                                                                                                            |
+| showHashtagPicker           | bool     | Shows hashtag picker                                                                                                                                          |
+| channelId                   | string   | If given, the mention picker will be targeted to this channel's members                                                                                       |
+| maxNumberOfHashtags         | number   | Maximum allowed number of hashtags                                                                                                                            |
+| opts                        | object   | Froala editor configurations. See Froala WYSIWYG editor v3 configurations.                                                                                    |
+| hashtagAddedCallback        | function | Callback on hashtag added                                                                                                                                     |
+| onFocused                   | function | Callback on focus event                                                                                                                                       |
+| onBlurred                   | function | Callback on blur event                                                                                                                                        |
+| onContentChanged            | function | Callback on content change event                                                                                                                              |
+| onVideoInserted             | function | Callback on video inserted event                                                                                                                              |
+| onImageUploaded             | function | Callback on image uploaded event                                                                                                                              |
+| onImageInserted             | function | Callback on image inserted event                                                                                                                              |
+| onImageRemoved              | function | Callback on image removed event                                                                                                                               |
+| onCmdEnterShortcutTriggered | function | Callback on pressing cmd/ctrl+enter                                                                                                                           |
