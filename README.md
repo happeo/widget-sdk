@@ -40,7 +40,7 @@ const myAwesomeWidget = ({widgetId}) => {
 
 `sdk.happeo.init("my-widget-id");`
 
-Initialises the SDK. Requires string widget id as the parameter.
+Initialises the SDK. Requires string widget id as the parameter. If this widget receives prop `uniqueId`, use that to initialise the widget.
 
 `sdk.happeo.user.getCurrentUser();`
 
