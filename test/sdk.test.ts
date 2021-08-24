@@ -1,5 +1,4 @@
 import sdk from '../src/index';
-import { setWidgetId } from '../src/initialise';
 
 const mockedtracks = jest.fn();
 const INIT_ERROR_MSG =
@@ -16,13 +15,17 @@ beforeEach(() => {
         __ngrcttracks: mockedtracks,
       } as any)
   );
-  setWidgetId('');
 });
 
 describe('Init', () => {
   test('Should init properly and send an analytics event', async () => {
-    await sdk.happeo.init('123');
-    expect(async () => await sdk.happeo.init('123')).not.toThrow();
+    const api = new sdk.Happeo('123');
+    expect(api.getWidgetId()).toBe('123');
+  });
+
+  test('Should init properly and send an analytics event by using init', async () => {
+    const api = new sdk.Happeo();
+    await api.init('123');
     expect(mockedtracks).toBeCalledWith(
       'trackClient',
       expect.objectContaining({
@@ -35,34 +38,39 @@ describe('Init', () => {
 
 describe('Not initialised state', () => {
   test('user.getCurrentUser()', async () => {
-    expect(sdk.happeo.user.getCurrentUser()).rejects.toThrow(INIT_ERROR_MSG);
+    const api = new sdk.Happeo();
+    expect(api.getCurrentUser()).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('user.oAuthBegin()', async () => {
-    expect(sdk.happeo.user.oAuthBegin()).rejects.toThrow(INIT_ERROR_MSG);
+    const api = new sdk.Happeo();
+    expect(api.oAuthBegin()).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('widget.getContext()', async () => {
-    expect(sdk.happeo.widget.getContext()).rejects.toThrow(INIT_ERROR_MSG);
+    const api = new sdk.Happeo();
+    expect(api.getContext()).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('user.getJWT()', async () => {
-    expect(sdk.happeo.widget.getJWT()).rejects.toThrow(INIT_ERROR_MSG);
+    const api = new sdk.Happeo();
+    expect(api.getJWT()).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('user.getContent()', async () => {
-    expect(sdk.happeo.widget.getContent()).rejects.toThrow(INIT_ERROR_MSG);
+    const api = new sdk.Happeo();
+    expect(api.getContent()).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('user.setContent()', async () => {
-    expect(sdk.happeo.widget.setContent('test')).rejects.toThrow(
-      INIT_ERROR_MSG
-    );
+    const api = new sdk.Happeo();
+    expect(api.setContent('test')).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('user.getSettings()', async () => {
-    expect(sdk.happeo.widget.getSettings()).rejects.toThrow(INIT_ERROR_MSG);
+    const api = new sdk.Happeo();
+    expect(api.getSettings()).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('user.setSettings()', async () => {
-    expect(sdk.happeo.widget.setSettings({})).rejects.toThrow(INIT_ERROR_MSG);
+    const api = new sdk.Happeo();
+    expect(api.setSettings({})).rejects.toThrow(INIT_ERROR_MSG);
   });
   test('user.declareSettings()', async () => {
-    expect(sdk.happeo.widget.declareSettings({}, () => {})).rejects.toThrow(
-      INIT_ERROR_MSG
-    );
+    const api = new sdk.Happeo();
+    expect(api.declareSettings({}, () => {})).rejects.toThrow(INIT_ERROR_MSG);
   });
 });

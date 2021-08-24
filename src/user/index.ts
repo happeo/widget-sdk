@@ -1,6 +1,5 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
-import { getWidgetId } from '../initialise';
 import { ANALYTICS_EVENTS, User } from '../interfaces';
 
 /**
@@ -8,12 +7,11 @@ import { ANALYTICS_EVENTS, User } from '../interfaces';
  *
  * @returns Happeo user object
  */
-export const getCurrentUser = async (): Promise<User> => {
+export const getCurrentUser = async (widgetId: string): Promise<User> => {
   try {
-    const widgetId = getWidgetId();
     const api = await getCustomWidgetGlobal();
 
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'user.getCurrentUser',
     });
     return api.user.getCurrentUser(widgetId);
@@ -29,11 +27,10 @@ export const getCurrentUser = async (): Promise<User> => {
  *
  * @returns Promise. Success = oAuth succeeded, Failure = oAuth failed
  */
-export const oAuthBegin = async (): Promise<void> => {
+export const oAuthBegin = async (widgetId: string): Promise<void> => {
   try {
-    const widgetId = getWidgetId();
     const api = await getCustomWidgetGlobal();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'user.oAuthBegin',
     });
 

@@ -1,12 +1,6 @@
-import { init } from './initialise';
-import * as user from './user';
-import * as widget from './widget';
+import Happeo from './sdk';
 
 export default {
-  happeo: {
-    init,
-    user,
-    widget,
-  },
+  Happeo,
   uikit: window.__customWidget?.uikit,
 };

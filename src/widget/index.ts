@@ -1,6 +1,5 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
-import { getWidgetId } from '../initialise';
 import { ANALYTICS_EVENTS, WidgetContent, WidgetContext } from '../interfaces';
 
 /**
@@ -8,10 +7,9 @@ import { ANALYTICS_EVENTS, WidgetContent, WidgetContext } from '../interfaces';
  *
  * @returns Context of the widget.
  */
-export const getContext = async (): Promise<WidgetContext> => {
+export const getContext = async (widgetId: string): Promise<WidgetContext> => {
   try {
-    const widgetId = getWidgetId();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getContext',
     });
     const api = await getCustomWidgetGlobal();
@@ -26,10 +24,9 @@ export const getContext = async (): Promise<WidgetContext> => {
  *
  * @returns string JWT
  */
-export const getJWT = async (): Promise<string> => {
+export const getJWT = async (widgetId: string): Promise<string> => {
   try {
-    const widgetId = getWidgetId();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getJWT',
     });
     const api = await getCustomWidgetGlobal();
@@ -44,10 +41,9 @@ export const getJWT = async (): Promise<string> => {
  *
  * @returns Content for the widget. String content and object properties
  */
-export const getContent = async (): Promise<WidgetContent> => {
+export const getContent = async (widgetId: string): Promise<WidgetContent> => {
   try {
-    const widgetId = getWidgetId();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getContent',
     });
     const api = await getCustomWidgetGlobal();
@@ -64,14 +60,16 @@ export const getContent = async (): Promise<WidgetContent> => {
  * @param content Stringified content to save
  * @returns void
  */
-export const setContent = async (content: string): Promise<any> => {
+export const setContent = async (
+  widgetId: string,
+  content: string
+): Promise<any> => {
   try {
     if (typeof content !== 'string') {
       throw new Error('Invalid content type, only string allowed.');
     }
 
-    const widgetId = getWidgetId();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.setContent',
     });
     const api = await getCustomWidgetGlobal();
@@ -86,10 +84,9 @@ export const setContent = async (content: string): Promise<any> => {
  *
  * @returns Object settings
  */
-export const getSettings = async (): Promise<any> => {
+export const getSettings = async (widgetId: string): Promise<any> => {
   try {
-    const widgetId = getWidgetId();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getSettings',
     });
     const api = await getCustomWidgetGlobal();
@@ -106,14 +103,16 @@ export const getSettings = async (): Promise<any> => {
  * @param settings Object settings to save
  * @returns void
  */
-export const setSettings = async (settings: object): Promise<any> => {
+export const setSettings = async (
+  widgetId: string,
+  settings: object
+): Promise<any> => {
   try {
     if (typeof settings !== 'object') {
       throw new Error('Invalid content type, only object allowed.');
     }
 
-    const widgetId = getWidgetId();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.setSettings',
     });
     const api = await getCustomWidgetGlobal();
@@ -130,7 +129,11 @@ export const setSettings = async (settings: object): Promise<any> => {
  * @param callback Callback function with updated data, runs on init and on every settings update
  * @returns void
  */
-export const declareSettings = async (settings: object, callback: Function) => {
+export const declareSettings = async (
+  widgetId: string,
+  settings: object,
+  callback: Function
+) => {
   try {
     if (typeof settings !== 'object') {
       throw new Error('Invalid content type, only object allowed.');
@@ -139,8 +142,7 @@ export const declareSettings = async (settings: object, callback: Function) => {
       throw new Error('Missing callback function');
     }
 
-    const widgetId = getWidgetId();
-    trackEvent(ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.declareSettings',
     });
     const api = await getCustomWidgetGlobal();

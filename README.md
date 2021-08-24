@@ -12,20 +12,21 @@ Install the widget SDK to your Happeo Widget project. See examples from [Custom 
 npm install @happeo/widget-sdk
 ```
 
-In your app, import the SDK and run `happeo.init(widgetId)` in order to start using it:
+In your app, import the SDK and run `const widgetApi = new Happeo.init(widgetId)` in order to start using it:
 
 ```
 import widgetSDK from "@happeo/widget-sdk";
 
-const { happeo, uikit } = widgetSDK
+const { Happeo, uikit } = widgetSDK;
+const widgetApi = new Happeo();
 
 const myAwesomeWidget = ({widgetId}) => {
     const [user, setUser] = useState();
 
     useEffect(() => {
         const init = async () => {
-            await happeo.init(widgetId);
-            setUser(await happeo.user.getCurrentUser());
+            await widgetApi.init(widgetId);
+            setUser(await widgetApi.getCurrentUser());
         }
         init();
     },[widgetId]);
@@ -42,11 +43,11 @@ const myAwesomeWidget = ({widgetId}) => {
 
 Initialises the SDK. Requires string widget id as the parameter. If this widget receives prop `uniqueId`, use that to initialise the widget.
 
-`sdk.happeo.user.getCurrentUser();`
+`sdk.happeo.getCurrentUser();`
 
 Returns the full current user who is viewing this widget. This includes all user data and organisation data.
 
-`sdk.happeo.user.oAuthBegin();`
+`sdk.happeo.oAuthBegin();`
 
 Starts oAuth flow, which can be specified to the widget from the widget setup. If this field is not specified in the widget settings (admin panel or marketplace), this function will throw an error. NOTE: This also requires userId and organisationId scopes to be added to the widget permissions.
 
@@ -54,7 +55,7 @@ The oAuth flow should be used when your custom widget requires an external oauth
 
 The function communicates back with a promise if the flow was successful.
 
-`sdk.happeo.widget.getContext();`
+`sdk.happeo.getContext();`
 
 Gets the full context of the widget:
 
@@ -88,35 +89,35 @@ Gets the full context of the widget:
 }
 ```
 
-`sdk.happeo.widget.getJWT();`
+`sdk.happeo.getJWT();`
 
-Gets the JWT for the widget if the widget has attached scopes. JWT contains the scoped data. Also returned in the `sdk.happeo.widget.getContext();`.
+Gets the JWT for the widget if the widget has attached scopes. JWT contains the scoped data. Also returned in the `sdk.happeo.getContext();`.
 
-`sdk.happeo.widget.getContent();`
+`sdk.happeo.getContent();`
 
 Gets the content for the widget. Content is not specific to the widget, but to the context. As an example, if this widget is added to a page in 2 places, widget will have own content for both places.
 
 Important note:
 Everything in the content is indexed in the Happeo search. So when you set this content (see below), note that you should consider this when making decisions on the data structure.
 
-`sdk.happeo.widget.setContent();`
+`sdk.happeo.setContent();`
 
 Sets string content to widget. This is the primary way of storing data in this widget. Data is stored in Happeo's servers.
 
 Important note:
 Everything in the content is indexed in the Happeo search. So when you set this content, note that you should consider this when making decisions on the data structure.
 
-`sdk.happeo.widget.getSettings();`
+`sdk.happeo.getSettings();`
 
 Gets the settings for this widget. These may include things like background color, font sizes or other things you want the user to configure.
 
 The settings object is always a simple key - value object with no nested structures. If you want nested structures, then you need to stringify the value.
 
-`sdk.happeo.widget.setSettings();`
+`sdk.happeo.setSettings();`
 
 Sets settings for this widget. This can be useful if you want to save some properties in the settings object and not in the content.
 
-`sdk.happeo.widget.declareSettings();`
+`sdk.happeo.declareSettings();`
 
 Creates new settings that are shown to the user in the Happeo UI. This allowes a seamless experience for the user where they can fill in overall configrutations for this widget.
 
