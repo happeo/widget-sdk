@@ -12,26 +12,29 @@ import {
   setSettings,
 } from '../widget';
 
-export default class WidgetSDK {
+export default class widgetApi {
   widgetId: string;
 
-  constructor(widgetId?: string) {
-    this.widgetId = '';
-
-    if (widgetId) {
-      this.setWidgetId(widgetId);
+  constructor(widgetId: string) {
+    if (typeof widgetId === 'undefined' || widgetId.length === 0) {
+      throw new Error(
+        'Call "await widgetApi.init(widgetId)" in order to initialise widgetApi.'
+      );
     }
+
+    this.widgetId = widgetId;
   }
 
-  setWidgetId = async (widgetId: string) => {
+  static async init(widgetId: string) {
     if (!widgetId) {
       throw new Error('Missing widgetId');
     }
 
-    this.widgetId = widgetId;
     await getCustomWidgetGlobal();
     await trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_INIT, { widgetId });
-  };
+
+    return new widgetApi(widgetId);
+  }
 
   getWidgetId = () => {
     if (!this.widgetId || this.widgetId.length === 0) {
@@ -42,9 +45,6 @@ export default class WidgetSDK {
 
     return this.widgetId;
   };
-
-  // Init widget
-  init = this.setWidgetId;
 
   // User api
   getCurrentUser = async () => getCurrentUser(this.getWidgetId());

@@ -1,6 +1,6 @@
-import Happeo from './sdk';
+import widgetApi from './api';
 
 export default {
-  Happeo,
+  widgetApi,
   uikit: window.__customWidget?.uikit,
 };
