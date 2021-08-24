@@ -12,7 +12,7 @@ Install the widget SDK to your Happeo Widget project. See examples from [Custom 
 npm install @happeo/widget-sdk
 ```
 
-In your app, import the SDK and run `const widgetApi = await api.init(widgetId)` in order to start using it:
+In your app, import the SDK and run `const widgetApi = await widgetSDK.api.init(widgetId)` in order to start using it:
 
 ```
 import widgetSDK from "@happeo/widget-sdk";
@@ -40,7 +40,7 @@ const myAwesomeWidget = ({widgetId}) => {
 
 ## SDK requests - happeo
 
-`const api = await sdk.api.init("my-widget-id");`
+`const api = await widgetSDK.api.init("my-widget-id");`
 
 Initialises the SDK. Requires string widget id as the parameter. If this widget receives prop `uniqueId`, use that to initialise the widget.
 
