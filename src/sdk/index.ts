@@ -51,9 +51,9 @@ export default class WidgetSDK {
   oAuthBegin = async () => oAuthBegin(this.getWidgetId());
 
   // Widget api
-  getContext = async () => getContent(this.getWidgetId());
+  getContext = async () => getContext(this.getWidgetId());
   getJWT = async () => getJWT(this.getWidgetId());
-  getContent = async () => getContext(this.getWidgetId());
+  getContent = async () => getContent(this.getWidgetId());
   setContent = async (content: string) =>
     setContent(this.getWidgetId(), content);
   getSettings = async () => getSettings(this.getWidgetId());
