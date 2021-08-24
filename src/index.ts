@@ -1,6 +1,6 @@
-import widgetApi from './api';
+import api from './api';
 
 export default {
-  widgetApi,
+  api,
   uikit: window.__customWidget?.uikit,
 };

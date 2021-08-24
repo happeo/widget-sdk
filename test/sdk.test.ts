@@ -17,7 +17,7 @@ beforeEach(() => {
 
 describe('Init', () => {
   test('Should init properly and send an analytics event', async () => {
-    const api = await sdk.widgetApi.init('123');
+    const api = await sdk.api.init('123');
     expect(api.getWidgetId()).toBe('123');
     expect(mockedtracks).toBeCalledWith(
       'trackClient',

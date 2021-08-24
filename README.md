@@ -12,21 +12,22 @@ Install the widget SDK to your Happeo Widget project. See examples from [Custom 
 npm install @happeo/widget-sdk
 ```
 
-In your app, import the SDK and run `const widgetApi = new Happeo.init(widgetId)` in order to start using it:
+In your app, import the SDK and run `const widgetApi = await api.init(widgetId)` in order to start using it:
 
 ```
 import widgetSDK from "@happeo/widget-sdk";
 
-const { Happeo, uikit } = widgetSDK;
-const widgetApi = new Happeo();
+const { api, uikit } = widgetSDK;
 
 const myAwesomeWidget = ({widgetId}) => {
     const [user, setUser] = useState();
+    const [widgetApi, setWidgetApi] = useState();
 
     useEffect(() => {
         const init = async () => {
-            await widgetApi.init(widgetId);
-            setUser(await widgetApi.getCurrentUser());
+            const api = await api.init(widgetId);
+            setUser(await api.getCurrentUser());
+            setWidgetApi(api)
         }
         init();
     },[widgetId]);
@@ -39,15 +40,15 @@ const myAwesomeWidget = ({widgetId}) => {
 
 ## SDK requests - happeo
 
-`sdk.happeo.init("my-widget-id");`
+`const api = await sdk.api.init("my-widget-id");`
 
 Initialises the SDK. Requires string widget id as the parameter. If this widget receives prop `uniqueId`, use that to initialise the widget.
 
-`sdk.happeo.getCurrentUser();`
+`api.getCurrentUser();`
 
 Returns the full current user who is viewing this widget. This includes all user data and organisation data.
 
-`sdk.happeo.oAuthBegin();`
+`api.oAuthBegin();`
 
 Starts oAuth flow, which can be specified to the widget from the widget setup. If this field is not specified in the widget settings (admin panel or marketplace), this function will throw an error. NOTE: This also requires userId and organisationId scopes to be added to the widget permissions.
 
@@ -55,7 +56,7 @@ The oAuth flow should be used when your custom widget requires an external oauth
 
 The function communicates back with a promise if the flow was successful.
 
-`sdk.happeo.getContext();`
+`api.getContext();`
 
 Gets the full context of the widget:
 
@@ -89,35 +90,35 @@ Gets the full context of the widget:
 }
 ```
 
-`sdk.happeo.getJWT();`
+`api.getJWT();`
 
-Gets the JWT for the widget if the widget has attached scopes. JWT contains the scoped data. Also returned in the `sdk.happeo.getContext();`.
+Gets the JWT for the widget if the widget has attached scopes. JWT contains the scoped data. Also returned in the `api.getContext();`.
 
-`sdk.happeo.getContent();`
+`api.getContent();`
 
 Gets the content for the widget. Content is not specific to the widget, but to the context. As an example, if this widget is added to a page in 2 places, widget will have own content for both places.
 
 Important note:
 Everything in the content is indexed in the Happeo search. So when you set this content (see below), note that you should consider this when making decisions on the data structure.
 
-`sdk.happeo.setContent();`
+`api.setContent();`
 
 Sets string content to widget. This is the primary way of storing data in this widget. Data is stored in Happeo's servers.
 
 Important note:
 Everything in the content is indexed in the Happeo search. So when you set this content, note that you should consider this when making decisions on the data structure.
 
-`sdk.happeo.getSettings();`
+`api.getSettings();`
 
 Gets the settings for this widget. These may include things like background color, font sizes or other things you want the user to configure.
 
 The settings object is always a simple key - value object with no nested structures. If you want nested structures, then you need to stringify the value.
 
-`sdk.happeo.setSettings();`
+`api.setSettings();`
 
 Sets settings for this widget. This can be useful if you want to save some properties in the settings object and not in the content.
 
-`sdk.happeo.declareSettings();`
+`api.declareSettings();`
 
 Creates new settings that are shown to the user in the Happeo UI. This allowes a seamless experience for the user where they can fill in overall configrutations for this widget.
 
