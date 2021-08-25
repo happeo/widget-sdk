@@ -24,7 +24,7 @@ async function _sendToHappeo(type: string, event: AnalyticsEvent) {
 export const trackEvent = (
   widgetId: string,
   eventName: ANALYTICS_EVENTS,
-  properties: any
+  properties: any = {}
 ): void => {
   try {
     const splitWidgetId = widgetId.split('_')[0];

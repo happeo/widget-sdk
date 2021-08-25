@@ -31,7 +31,7 @@ export default class widgetApi {
     }
 
     await getCustomWidgetGlobal();
-    await trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_INIT, { widgetId });
+    await trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_INIT, {});
 
     return new widgetApi(widgetId);
   }
