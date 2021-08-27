@@ -3,6 +3,39 @@ import { getCustomWidgetGlobal } from '../globals';
 import { ANALYTICS_EVENTS, WidgetContent, WidgetContext } from '../interfaces';
 
 /**
+ * Returns a stringified error or empty string
+ *
+ * @param error any
+ * @returns string
+ */
+const getStringifiedError = (error?: Error | string): string => {
+  if (typeof error === 'string') {
+    return error;
+  }
+  try {
+    return JSON.stringify(error);
+  } catch (error) {
+    return '';
+  }
+};
+
+/**
+ * Reports error to the backend analytics. Automates error reporting to the developer.
+ *
+ * @param error any
+ * @returns void
+ */
+export const reportError = (widgetId: string, error?: Error | string): void => {
+  try {
+    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_ERROR, {
+      error: getStringifiedError(error),
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
  * Gets the context of the widget.Who is viewing the widget and where is this widget being displayed
  *
  * @returns Context of the widget.

@@ -1,13 +1,14 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
 import { ANALYTICS_EVENTS } from '../interfaces';
-import { getCurrentUser, oAuthBegin } from '../user';
+import { getCurrentUser } from '../user';
 import {
   declareSettings,
   getContent,
   getContext,
   getJWT,
   getSettings,
+  reportError,
   setContent,
   setSettings,
 } from '../widget';
@@ -48,9 +49,10 @@ export default class widgetApi {
 
   // User api
   getCurrentUser = async () => getCurrentUser(this.getWidgetId());
-  oAuthBegin = async () => oAuthBegin(this.getWidgetId());
 
   // Widget api
+  reportError = (error: Error | string) =>
+    reportError(this.getWidgetId(), error);
   getContext = async () => getContext(this.getWidgetId());
   getJWT = async () => getJWT(this.getWidgetId());
   getContent = async () => getContent(this.getWidgetId());

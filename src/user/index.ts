@@ -19,23 +19,3 @@ export const getCurrentUser = async (widgetId: string): Promise<User> => {
     throw error;
   }
 };
-
-/**
- * Function that initialises oAuth flow. This requires oAuthUrl to be specified for the
- * widget. The flow opens up a popup that ends up in marketplace.happeo.com oauth flow
- * ending page that will report the result back to this function.
- *
- * @returns Promise. Success = oAuth succeeded, Failure = oAuth failed
- */
-export const oAuthBegin = async (widgetId: string): Promise<void> => {
-  try {
-    const api = await getCustomWidgetGlobal();
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
-      functionName: 'user.oAuthBegin',
-    });
-
-    return api.user.oAuthBegin(widgetId);
-  } catch (error) {
-    throw error;
-  }
-};

@@ -48,13 +48,9 @@ Initialises the SDK. Requires string widget id as the parameter. If this widget 
 
 Returns the full current user who is viewing this widget. This includes all user data and organisation data.
 
-`api.oAuthBegin();`
+`api.reportError();`
 
-Starts oAuth flow, which can be specified to the widget from the widget setup. If this field is not specified in the widget settings (admin panel or marketplace), this function will throw an error. NOTE: This also requires userId and organisationId scopes to be added to the widget permissions.
-
-The oAuth flow should be used when your custom widget requires an external oauth that stores authentication keys to your own servers. This flow is protected by the generated JWT key, which is used to verify the oAuth flow callback in Happeo servers.
-
-The function communicates back with a promise if the flow was successful.
+Reports an error to the widget. This is used by automated error reporting by Happeo. We strongly recommend using this in order to know if your widget is misbehaving.
 
 `api.getContext();`
 
@@ -92,7 +88,7 @@ Gets the full context of the widget:
 
 `api.getJWT();`
 
-Gets the JWT for the widget if the widget has attached scopes. JWT contains the scoped data. Also returned in the `api.getContext();`.
+Gets the JWT for the widget if the widget has attached scopes refreshes the JWT automatically if needed. Call this always before utilising the JWT because the JWT will expire and the user may idle on the page before interacting with your widget.
 
 `api.getContent();`
 
