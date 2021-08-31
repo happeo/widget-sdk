@@ -139,6 +139,21 @@ Settings object structure and example:
 ]
 ```
 
+`api.uploadImage(input: UploadInput);`
+
+Upload images to Happeo CDN with current user's credentials.
+
+```
+interface UploadInput {
+  files: FileList;
+  channelId: string;
+  startUpload: (entry: UploadEntry) => void;
+  updateUploadProgress: (entry: UploadEntry) => void;
+  onUploadError: (id: string, error: Error) => void;
+  chooseDestinationDirectory: () => Promise<{ file: File }>;
+}
+```
+
 ### Widget setting types
 
 Possible setting types are:

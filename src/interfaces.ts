@@ -42,3 +42,28 @@ export interface User {
   primaryEmail: string;
   organisation: Organisation;
 }
+
+interface UploadEntry {
+  file: File;
+  type: string;
+  id: string;
+  title: string;
+  displayAs: string;
+  params: {
+    now: string;
+    later: string;
+  };
+  uri: string;
+  url: string;
+  uuid: string;
+  uploading: boolean;
+  uploadProgress: number;
+}
+
+export interface UploadInput {
+  files: File[];
+  startUpload?: (entry: UploadEntry) => void;
+  updateUploadProgress?: (entry: UploadEntry) => void;
+  onUploadError?: (id: string, error: Error) => void;
+  chooseDestinationDirectory?: () => Promise<{ file: File }>;
+}

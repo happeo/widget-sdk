@@ -23,7 +23,7 @@ describe('Init', () => {
       'trackClient',
       expect.objectContaining({
         name: 'Custom widget: initialise',
-        properties: { widgetId: '123' },
+        properties: { uniqueId: '123', widgetId: '123' },
       })
     );
   });
