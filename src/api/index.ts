@@ -1,7 +1,8 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
-import { ANALYTICS_EVENTS } from '../interfaces';
+import { ANALYTICS_EVENTS, UploadInput } from '../interfaces';
 import { getCurrentUser } from '../user';
+import { uploadImage } from '../upload';
 import {
   declareSettings,
   getContent,
@@ -63,4 +64,7 @@ export default class widgetApi {
     setSettings(this.getWidgetId(), settings);
   declareSettings = async (settings: object, callback: Function) =>
     declareSettings(this.getWidgetId(), settings, callback);
+
+  // Image upload api
+  uploadImage = (input: UploadInput) => uploadImage(this.getWidgetId(), input);
 }
