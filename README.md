@@ -4,6 +4,10 @@ Start building your own widget in Happeo!
 
 The widget SDK allows you to tap directly to Happeo apis and content in order to create fully customisable widgets.
 
+## Important
+
+We are moving to open Beta with custom widget components, which includes this widgetSDK. That means we are still gathering feedback from developers on how to improve the SDK. There should not be any breaking changes to the SDK, however please do keep in mind the current alpha/beta -state.
+
 ## How to use
 
 Install the widget SDK to your Happeo Widget project. See examples from [Custom Widget Templates](https://github.com/happeo/custom-widget-templates).
