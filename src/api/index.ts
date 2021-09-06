@@ -15,37 +15,37 @@ import {
 } from '../widget';
 
 export default class widgetApi {
-  widgetId: string;
+  uniqueWidgetId: string;
 
-  constructor(widgetId: string) {
-    if (typeof widgetId === 'undefined' || widgetId.length === 0) {
+  constructor(uniqueWidgetId: string) {
+    if (typeof uniqueWidgetId === 'undefined' || uniqueWidgetId.length === 0) {
       throw new Error(
-        'Call "await widgetApi.init(widgetId)" in order to initialise widgetApi.'
+        'Call "await widgetApi.init(uniqueWidgetId)" in order to initialise widgetApi.'
       );
     }
 
-    this.widgetId = widgetId;
+    this.uniqueWidgetId = uniqueWidgetId;
   }
 
-  static async init(widgetId: string) {
-    if (!widgetId) {
-      throw new Error('Missing widgetId');
+  static async init(uniqueWidgetId: string) {
+    if (!uniqueWidgetId) {
+      throw new Error('Missing uniqueWidgetId');
     }
 
     await getCustomWidgetGlobal();
-    await trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_INIT, {});
+    await trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_INIT, {});
 
-    return new widgetApi(widgetId);
+    return new widgetApi(uniqueWidgetId);
   }
 
   getWidgetId = () => {
-    if (!this.widgetId || this.widgetId.length === 0) {
+    if (!this.uniqueWidgetId || this.uniqueWidgetId.length === 0) {
       throw new Error(
         'Widget SDK not initialised. Please call init -function first.'
       );
     }
 
-    return this.widgetId;
+    return this.uniqueWidgetId;
   };
 
   // User api

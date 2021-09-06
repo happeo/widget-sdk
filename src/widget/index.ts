@@ -25,9 +25,12 @@ const getStringifiedError = (error?: Error | string): string => {
  * @param error any
  * @returns void
  */
-export const reportError = (widgetId: string, error?: Error | string): void => {
+export const reportError = (
+  uniqueWidgetId: string,
+  error?: Error | string
+): void => {
   try {
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_ERROR, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_ERROR, {
       error: getStringifiedError(error),
     });
   } catch (error) {
@@ -40,13 +43,15 @@ export const reportError = (widgetId: string, error?: Error | string): void => {
  *
  * @returns Context of the widget.
  */
-export const getContext = async (widgetId: string): Promise<WidgetContext> => {
+export const getContext = async (
+  uniqueWidgetId: string
+): Promise<WidgetContext> => {
   try {
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getContext',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.getContext(widgetId);
+    return api.widget.getContext(uniqueWidgetId);
   } catch (error) {
     throw error;
   }
@@ -57,13 +62,13 @@ export const getContext = async (widgetId: string): Promise<WidgetContext> => {
  *
  * @returns string JWT
  */
-export const getJWT = async (widgetId: string): Promise<string> => {
+export const getJWT = async (uniqueWidgetId: string): Promise<string> => {
   try {
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getJWT',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.getJWT(widgetId);
+    return api.widget.getJWT(uniqueWidgetId);
   } catch (error) {
     throw error;
   }
@@ -74,13 +79,15 @@ export const getJWT = async (widgetId: string): Promise<string> => {
  *
  * @returns Content for the widget. String content and object properties
  */
-export const getContent = async (widgetId: string): Promise<WidgetContent> => {
+export const getContent = async (
+  uniqueWidgetId: string
+): Promise<WidgetContent> => {
   try {
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getContent',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.getContent(widgetId);
+    return api.widget.getContent(uniqueWidgetId);
   } catch (error) {
     throw error;
   }
@@ -94,7 +101,7 @@ export const getContent = async (widgetId: string): Promise<WidgetContent> => {
  * @returns void
  */
 export const setContent = async (
-  widgetId: string,
+  uniqueWidgetId: string,
   content: string
 ): Promise<any> => {
   try {
@@ -102,11 +109,11 @@ export const setContent = async (
       throw new Error('Invalid content type, only string allowed.');
     }
 
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.setContent',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.setContent(content, widgetId);
+    return api.widget.setContent(content, uniqueWidgetId);
   } catch (error) {
     throw error;
   }
@@ -117,13 +124,13 @@ export const setContent = async (
  *
  * @returns Object settings
  */
-export const getSettings = async (widgetId: string): Promise<any> => {
+export const getSettings = async (uniqueWidgetId: string): Promise<any> => {
   try {
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.getSettings',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.getSettings(widgetId);
+    return api.widget.getSettings(uniqueWidgetId);
   } catch (error) {
     throw error;
   }
@@ -137,7 +144,7 @@ export const getSettings = async (widgetId: string): Promise<any> => {
  * @returns void
  */
 export const setSettings = async (
-  widgetId: string,
+  uniqueWidgetId: string,
   settings: object
 ): Promise<any> => {
   try {
@@ -145,11 +152,11 @@ export const setSettings = async (
       throw new Error('Invalid content type, only object allowed.');
     }
 
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.setSettings',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.setSettings(settings, widgetId);
+    return api.widget.setSettings(settings, uniqueWidgetId);
   } catch (error) {
     throw error;
   }
@@ -163,7 +170,7 @@ export const setSettings = async (
  * @returns void
  */
 export const declareSettings = async (
-  widgetId: string,
+  uniqueWidgetId: string,
   settings: object,
   callback: Function
 ) => {
@@ -175,11 +182,11 @@ export const declareSettings = async (
       throw new Error('Missing callback function');
     }
 
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'widget.declareSettings',
     });
     const api = await getCustomWidgetGlobal();
-    return api.widget.declareSettings(settings, callback, widgetId);
+    return api.widget.declareSettings(settings, callback, uniqueWidgetId);
   } catch (error) {
     throw error;
   }

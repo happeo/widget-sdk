@@ -8,11 +8,14 @@ import { ANALYTICS_EVENTS, UploadInput } from '../interfaces';
  * @param widgetId WidgetId for tracking
  * @param input input for files
  */
-export const uploadImage = async (widgetId: string, input: UploadInput) => {
+export const uploadImage = async (
+  uniqueWidgetId: string,
+  input: UploadInput
+) => {
   try {
     const api = await getCustomWidgetGlobal();
 
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'upload.uploadImage',
     });
     return api.upload.uploadImage(

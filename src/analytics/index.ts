@@ -22,17 +22,17 @@ async function _sendToHappeo(type: string, event: AnalyticsEvent) {
  * @param properties Properties to be sent with the event.
  */
 export const trackEvent = (
-  widgetId: string,
+  uniqueWidgetId: string,
   eventName: ANALYTICS_EVENTS,
   properties: any = {}
 ): void => {
   try {
-    const splitWidgetId = widgetId.split('_')[0];
+    const splitWidgetId = uniqueWidgetId.split('_')[0];
     _sendToHappeo('trackClient', {
       name: eventName,
       properties: {
         widgetId: splitWidgetId,
-        uniqueId: widgetId,
+        uniqueId: uniqueWidgetId,
         ...properties,
       },
       timestamp: Date.now(),

@@ -5,6 +5,41 @@ declare global {
   }
 }
 
+enum SETTINGS_ITEM_TYPE {
+  CHECKBOX = 'checkbox',
+  COLOR = 'color',
+  DROPDOWN = 'dropdown',
+  LINK = 'help-link',
+  NUMBER = 'number',
+  PARAGRAPH = 'paragraph',
+  TEXT = 'text',
+  TOGGLE = 'toggle',
+  UPLOAD = 'upload',
+  URL = 'url',
+}
+
+interface OPTIONS_ITEM {
+  label: string;
+  value: string | number;
+}
+
+interface CROPPING_CONFIG {
+  width: number;
+  height: number;
+}
+
+export interface SETTING {
+  placeholder: string;
+  key: string;
+  value: string;
+  type: SETTINGS_ITEM_TYPE;
+  options?: OPTIONS_ITEM;
+  minValue?: number;
+  maxValue?: number;
+  enableCropping?: boolean;
+  croppingConfig?: CROPPING_CONFIG;
+}
+
 export enum ANALYTICS_EVENTS {
   WIDGET_INIT = 'Custom widget: initialise',
   WIDGET_REQUEST = 'Custom widget: use sdk',
@@ -33,13 +68,50 @@ export interface WidgetContent {
 
 export interface Organisation {
   id: string;
+  name: string;
+  primaryDomain: string;
+  logo: string | null;
+  primaryColor: string;
+  secondaryColor: string;
+}
+
+interface UserName {
+  givenName: string;
+  familyName: string;
+  fullName: string;
+}
+
+interface OrgInfo {
+  primary: boolean;
+  department: string | null;
+  costCenter: string | null;
+  title: string | null;
+}
+
+interface AddressInfo {
+  formatted: string | null;
+  type: string | null;
+}
+
+interface PhonesInfo {
+  value: string | null;
+  type: string | null;
+}
+
+interface DateObject {
+  millis: number | null;
+  isoString: string | null;
 }
 
 export interface User {
   id: string;
-  name: any;
+  name: UserName;
   thumbnailPhotoUrl: string;
   primaryEmail: string;
+  organizations: OrgInfo[];
+  addresses: AddressInfo[];
+  phones: PhonesInfo[];
+  birthday: DateObject;
   organisation: Organisation;
 }
 

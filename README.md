@@ -16,25 +16,25 @@ Install the widget SDK to your Happeo Widget project. See examples from [Custom 
 npm install @happeo/widget-sdk
 ```
 
-In your app, import the SDK and run `const widgetApi = await widgetSDK.api.init(widgetId)` in order to start using it:
+In your app, import the SDK and run `const widgetApi = await widgetSDK.api.init(uniqueWidgetId)` in order to start using it:
 
 ```
 import widgetSDK from "@happeo/widget-sdk";
 
 const { api, uikit } = widgetSDK;
 
-const myAwesomeWidget = ({widgetId}) => {
+const myAwesomeWidget = ({uniqueId}) => {
     const [user, setUser] = useState();
     const [widgetApi, setWidgetApi] = useState();
 
     useEffect(() => {
         const init = async () => {
-            const api = await api.init(widgetId);
+            const api = await api.init(uniqueId);
             setUser(await api.getCurrentUser());
             setWidgetApi(api)
         }
         init();
-    },[widgetId]);
+    },[uniqueId]);
 
     return (
         <p>Hello world, {user?.name?.fullName}!</p>
@@ -44,9 +44,9 @@ const myAwesomeWidget = ({widgetId}) => {
 
 ## SDK requests - happeo
 
-`const api = await widgetSDK.api.init("my-widget-id");`
+`const api = await widgetSDK.api.init("uniqueId");`
 
-Initialises the SDK. Requires string widget id as the parameter. If this widget receives prop `uniqueId`, use that to initialise the widget.
+Initialises the SDK. Requires string `uniqueId` as the parameter.
 
 `api.getCurrentUser();`
 

@@ -7,14 +7,14 @@ import { ANALYTICS_EVENTS, User } from '../interfaces';
  *
  * @returns Happeo user object
  */
-export const getCurrentUser = async (widgetId: string): Promise<User> => {
+export const getCurrentUser = async (uniqueWidgetId: string): Promise<User> => {
   try {
     const api = await getCustomWidgetGlobal();
 
-    trackEvent(widgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
       functionName: 'user.getCurrentUser',
     });
-    return api.user.getCurrentUser(widgetId);
+    return api.user.getCurrentUser(uniqueWidgetId);
   } catch (error) {
     throw error;
   }
