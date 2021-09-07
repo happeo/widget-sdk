@@ -65,7 +65,7 @@ Gets the full context of the widget:
 {
     userId: "123",
     organisationId: "223",
-    editMode: true,
+    mode: "edit",
     token: "adadadad",
     scopedData: {
         user: {
