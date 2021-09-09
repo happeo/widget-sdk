@@ -46,3 +46,7 @@ const myAwesomeWidget = ({uniqueId}) => {
 
 For detailed documentation, please visit the wiki:
 https://github.com/happeo/widgets-sdk/wiki
+
+## SDK mock mode
+
+In case you want to do development outside Happeo you can use environment variable `MOCK_WIDGET_SDK=true` to use mocked Widget SDK.
