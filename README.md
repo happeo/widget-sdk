@@ -42,6 +42,10 @@ const myAwesomeWidget = ({uniqueId}) => {
 };
 ```
 
+## Development
+
+If you want to develop your widget locally, you can start the widgetSDK in mocked mode by providing environment variable `MOCK_WIDGET_SDK=true`.
+
 ## More information
 
 For detailed documentation, please visit the wiki:
