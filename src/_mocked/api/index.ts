@@ -35,7 +35,7 @@ export default class mockedWidgetApi {
     await getCustomWidgetGlobal();
     await getAnalyticsGlobal();
 
-    return new widgetApi(uniqueWidgetId);
+    return new mockedWidgetApi(uniqueWidgetId);
   }
 
   getWidgetId = () => {
