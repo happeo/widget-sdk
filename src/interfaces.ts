@@ -1,7 +1,10 @@
+import { EventService } from "./services/EventService";
+
 declare global {
   interface Window {
     __ngrcttracks: any;
     __customWidget: any;
+    __happeoEvents: EventService;
   }
 }
 
@@ -138,4 +141,10 @@ export interface UploadInput {
   updateUploadProgress?: (entry: UploadEntry) => void;
   onUploadError?: (id: string, error: Error) => void;
   chooseDestinationDirectory?: () => Promise<{ file: File }>;
+}
+
+export enum EventType {
+  suggestions = 'suggestions',
+  search = 'search',
+  filters = 'filters'
 }
