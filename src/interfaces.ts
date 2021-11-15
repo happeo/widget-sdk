@@ -142,9 +142,3 @@ export interface UploadInput {
   onUploadError?: (id: string, error: Error) => void;
   chooseDestinationDirectory?: () => Promise<{ file: File }>;
 }
-
-export enum EventType {
-  suggestions = 'suggestions',
-  search = 'search',
-  filters = 'filters'
-}

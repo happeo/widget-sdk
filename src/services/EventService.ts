@@ -1,8 +1,7 @@
-import { EventType } from "../interfaces";
 
 export interface HappeoEvent<T> {
   id: string;
-  type: EventType;
+  type: string;
   emit: (data: T) => void;
 }
 
@@ -23,7 +22,7 @@ export class EventService {
     return window.__happeoEvents;
   }
 
-  public registerListener<T>(id: string, type: EventType, callback: (data: T) => void): void {
+  public registerListener<T>(id: string, type: string, callback: (data: T) => void): void {
 
     // Validate if there is already an event handler registered
     const event = this.bindedHandlers.find(e => e.id === id && e.type === type);
@@ -58,7 +57,7 @@ export class EventService {
     }
   }
 
-  public async registerEmitter<T>(type: EventType): Promise<HappeoEvent<T> | HappeoEvent<T>[] | null> {
+  public async registerEmitter<T>(type: string): Promise<HappeoEvent<T> | HappeoEvent<T>[] | null> {
 
     // Get the listener
     const listener = this.bindedHandlers.filter(e => e.type === type);
@@ -85,7 +84,7 @@ export class EventService {
     }
   }
 
-  public unregisterListener(id: string, type: EventType): void {
+  public unregisterListener(id: string, type: string): void {
     const bindedHandler = this.bindedHandlers.find(e => e.id === id && e.type === type);
 
     if (bindedHandler) {
