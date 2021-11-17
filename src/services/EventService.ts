@@ -2,7 +2,7 @@
 export interface HappeoEvent<T> {
   id: string;
   type: string;
-  emit: (data: T) => void;
+  emit: (data: T) => any;
 }
 
 export interface UnbindedHappeoEvent<T> {
@@ -20,6 +20,10 @@ export class EventService {
       window.__happeoEvents = new EventService();
     }
     return window.__happeoEvents;
+  }
+
+  public generateModalSettingsId(widgetId: string, settingsId: string): string {
+    return `SettingsModalDialog-${widgetId}-${settingsId}`;
   }
 
   public registerListener<T>(id: string, type: string, callback: (data: T) => void): void {
