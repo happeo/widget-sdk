@@ -6,7 +6,7 @@ import { ANALYTICS_EVENTS } from '../interfaces';
  * Happeo Metascaper extract
  *
  * @param widgetId WidgetId for tracking
- * @param input input for files
+ * @param url url to scrape
  */
 export const metaScaperExtract = async (
   uniqueWidgetId: string,
