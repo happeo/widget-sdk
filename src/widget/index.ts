@@ -75,6 +75,26 @@ export const getJWT = async (uniqueWidgetId: string): Promise<string> => {
 };
 
 /**
+ * Gets the one time JWT for the widget.
+ * JWT includes signed data from the user & organisation and can be used only one time.
+ *
+ * @returns string JWT
+ */
+export const getOneTimeJWT = async (
+  uniqueWidgetId: string
+): Promise<string> => {
+  try {
+    trackEvent(uniqueWidgetId, ANALYTICS_EVENTS.WIDGET_REQUEST, {
+      functionName: 'widget.getOneTimeJWT',
+    });
+    const api = await getCustomWidgetGlobal();
+    return api.widget.getOneTimeJWT(uniqueWidgetId);
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
  * Gets the content for the widget. Depending on where widget is shown, different content will be delivered
  *
  * @returns Content for the widget. String content and object properties
