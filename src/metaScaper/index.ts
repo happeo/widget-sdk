@@ -8,7 +8,10 @@ import { ANALYTICS_EVENTS } from '../interfaces';
  * @param widgetId WidgetId for tracking
  * @param input input for files
  */
-export const extract = async (uniqueWidgetId: string, url: string) => {
+export const metaScaperExtract = async (
+  uniqueWidgetId: string,
+  url: string
+) => {
   try {
     const api = await getCustomWidgetGlobal();
 

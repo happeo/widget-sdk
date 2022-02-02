@@ -3,11 +3,13 @@ import { getCustomWidgetGlobal } from '../globals';
 import { ANALYTICS_EVENTS, UploadInput } from '../interfaces';
 import { getCurrentUser } from '../user';
 import { uploadImage } from '../upload';
+import { metaScaperExtract } from '../metaScaper';
 import {
   declareSettings,
   getContent,
   getContext,
   getJWT,
+  getOneTimeJWT,
   getSettings,
   reportError,
   setContent,
@@ -56,6 +58,7 @@ export default class widgetApi {
     reportError(this.getWidgetId(), error);
   getContext = async () => getContext(this.getWidgetId());
   getJWT = async () => getJWT(this.getWidgetId());
+  getOneTimeJWT = async () => getOneTimeJWT(this.getWidgetId());
   getContent = async () => getContent(this.getWidgetId());
   setContent = async (content: string) =>
     setContent(this.getWidgetId(), content);
@@ -67,4 +70,8 @@ export default class widgetApi {
 
   // Image upload api
   uploadImage = (input: UploadInput) => uploadImage(this.getWidgetId(), input);
+
+  // metaScaperExtract api
+  metaScaperExtract = (url: string) =>
+    metaScaperExtract(this.getWidgetId(), url);
 }

@@ -56,6 +56,7 @@ export default class mockedWidgetApi {
     console.log('_MOCK reportError called', error);
   getContext = async () => context;
   getJWT = async () => 'JWT';
+  getOneTimeJWT = async () => 'JWT';
   getContent = async () => getContent(this.getWidgetId());
   setContent = async (content: string) =>
     setContent(this.getWidgetId(), content);
@@ -67,6 +68,10 @@ export default class mockedWidgetApi {
   };
 
   // Image upload api
-  uploadImage = (input: UploadInput) =>
+  uploadImage = async (input: UploadInput) =>
     console.log('_MOCK uploadImage called', this.getWidgetId(), input);
+
+  // metaScaperExtract api
+  metaScaperExtract = async (url: string) =>
+    console.log('_MOCK metaScaperExtract called', this.getWidgetId(), url);
 }
