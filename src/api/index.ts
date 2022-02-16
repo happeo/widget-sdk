@@ -1,7 +1,7 @@
 import { trackEvent } from '../analytics';
 import { getCustomWidgetGlobal } from '../globals';
 import { ANALYTICS_EVENTS, UploadInput } from '../interfaces';
-import { getCurrentUser } from '../user';
+import { getCurrentUser, getUser, searchUsers } from '../user';
 import { uploadImage } from '../upload';
 import { metaScaperExtract } from '../metaScaper';
 import {
@@ -52,6 +52,11 @@ export default class widgetApi {
 
   // User api
   getCurrentUser = async () => getCurrentUser(this.getWidgetId());
+  getUser = async (id: string) => getUser(this.getWidgetId(), id);
+  searchUsers = async (
+    query: string,
+    options: { page: number; pageSize: number }
+  ) => searchUsers(this.getWidgetId(), query, options);
 
   // Widget api
   reportError = (error: Error | string) =>
