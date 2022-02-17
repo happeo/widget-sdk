@@ -50,6 +50,17 @@ export default class mockedWidgetApi {
 
   // User api
   getCurrentUser = async () => user;
+  getUser = async (id: string) => {
+    console.log('_MOCK getUser called', id);
+    return user;
+  };
+  searchUsers = async (
+    query: string,
+    options: { page: number; pageSize: number }
+  ) => {
+    console.log('_MOCK searchUsers called', query, options);
+    return { total: 1, hits: [user] };
+  };
 
   // Widget api
   reportError = (error: Error | string) =>
