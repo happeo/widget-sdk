@@ -75,7 +75,7 @@ export default class mockedWidgetApi {
   setSettings = async (settings: object) =>
     setSettings(this.getWidgetId(), settings);
   declareSettings = async (_: object, callback: Function) => {
-    callback({});
+    callback(getSettings(this.getWidgetId()));
   };
 
   // Image upload api
