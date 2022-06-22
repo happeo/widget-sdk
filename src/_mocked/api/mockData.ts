@@ -43,22 +43,36 @@ export const context: WidgetContext = {
   organisationId: 'o123',
 };
 
-const _content: { [key: string]: string } = {};
+declare global {
+  interface Window {
+    __mockedWidgetSdk: any;
+  }
+}
 
 export const setContent = (uniqueId: string, content: string) => {
-  _content[uniqueId] = content;
+  if (!window.__mockedWidgetSdk) {
+    window.__mockedWidgetSdk = {};
+  }
+  if (!window.__mockedWidgetSdk.content) {
+    window.__mockedWidgetSdk.content = {};
+  }
+  window.__mockedWidgetSdk.content[uniqueId] = content;
 };
 
 export const getContent = (uniqueId: string) => {
-  return _content[uniqueId];
+  return window.__mockedWidgetSdk?.content[uniqueId] || {};
 };
 
-const _settings: { [key: string]: any } = {};
-
 export const setSettings = (uniqueId: string, settings: any) => {
-  _settings[uniqueId] = settings;
+  if (!window.__mockedWidgetSdk) {
+    window.__mockedWidgetSdk = {};
+  }
+  if (!window.__mockedWidgetSdk.settings) {
+    window.__mockedWidgetSdk.settings = {};
+  }
+  window.__mockedWidgetSdk.settings[uniqueId] = settings;
 };
 
 export const getSettings = (uniqueId: string) => {
-  return _settings[uniqueId];
+  return window.__mockedWidgetSdk?.settings[uniqueId] || {};
 };
