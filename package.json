@@ -33,7 +33,7 @@
   },
   "name": "@happeo/widget-sdk",
   "author": "Antero Hanhirova",
-  "module": "dist/index.esm.js",
+  "module": "dist/index.js",
   "size-limit": [
     {
       "path": "dist/index.cjs.production.min.js",
