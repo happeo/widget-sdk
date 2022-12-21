@@ -113,6 +113,15 @@ export interface User {
   phones: PhonesInfo[];
   birthday: DateObject;
   organisation: Organisation;
+  additionalInfo: UserAdditionalInfo;
+}
+
+interface UserAdditionalInfo {
+  items: UserAdditionalInfoItem[];
+}
+interface UserAdditionalInfoItem {
+  value: string;
+  key: string;
 }
 
 interface UploadEntry {
