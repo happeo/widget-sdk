@@ -33,7 +33,7 @@ export interface SETTING {
   key: string;
   value: string;
   type: SETTINGS_ITEM_TYPE;
-  options?: OPTIONS_ITEM;
+  options?: OPTIONS_ITEM[];
   minValue?: number;
   maxValue?: number;
   enableCropping?: boolean;
