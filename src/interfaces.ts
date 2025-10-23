@@ -11,6 +11,7 @@ enum SETTINGS_ITEM_TYPE {
   DROPDOWN = 'dropdown',
   LINK = 'help-link',
   NUMBER = 'number',
+  /** @deprecated */
   PARAGRAPH = 'paragraph',
   TEXT = 'text',
   TOGGLE = 'toggle',
